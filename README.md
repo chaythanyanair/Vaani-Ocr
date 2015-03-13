@@ -1,2 +1,2 @@
 # Vaani-Ocr
-A Malayalam Optical Character Recognition Application in Android
+Malayalam OCR for Android
