@@ -13,27 +13,28 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.content.Intent;
 import android.database.Cursor;
-import android.widget.Button;
+
 import android.net.Uri;
+import com.example.VaaniOcr.R;
 
 
 public class MainActivity extends ActionBarActivity {
-	Button camera,gallery;
+	
 	public Uri fileUri;
-	ImageView showImg;
+	ImageView showImg,camera,gallery;
 	public static File fileName;
 	private String selectedImagePath;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		showImg = (ImageView)findViewById(R.id.imageView1);
-		camera = (Button)findViewById(R.id.button1);
+		camera = (ImageView)findViewById(R.id.viewImage);
+		gallery=(ImageView)findViewById(R.id.viewImage1);
 	    camera.setOnClickListener(new OnClickListener() {
 	    	@Override
 	        public void onClick(View v) { open();}
 	    });
-	    gallery=(Button)findViewById(R.id.button2);
+	    
 	    gallery.setOnClickListener(new View.OnClickListener() {
 	    	@Override
 	    	public void onClick(View v) { /*Open Gallery*/

@@ -11,6 +11,7 @@ import android.net.*;
 import android.view.*;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
+import com.example.VaaniOcr.R;
 
 public class CropImage extends ActionBarActivity{
 	public Uri picUri;
