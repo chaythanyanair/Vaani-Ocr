@@ -37,6 +37,8 @@ public class SecondActivity extends ActionBarActivity {
         /*Display Image*/
         if(imgFile.exists()){
         	Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+        	BitmapFactory.Options options = new BitmapFactory.Options();
+        	options.inSampleSize = 4;
        		ImageView showImg = (ImageView) findViewById(R.id.view_photo);
         	showImg.setImageBitmap(myBitmap);
         	}

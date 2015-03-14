@@ -6,12 +6,13 @@ import java.util.*;
 import android.os.*;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
-
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.content.Intent;
+import android.database.Cursor;
 import android.widget.Button;
 import android.net.Uri;
 
@@ -21,6 +22,7 @@ public class MainActivity extends ActionBarActivity {
 	public Uri fileUri;
 	ImageView showImg;
 	public static File fileName;
+	private String selectedImagePath;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,15 +35,9 @@ public class MainActivity extends ActionBarActivity {
 	    });
 	    gallery=(Button)findViewById(R.id.button2);
 	    gallery.setOnClickListener(new View.OnClickListener() {
-
 	    	@Override
-	    	public void onClick(View v) {
-	    	
-	    	Intent intent = new Intent();
-	    	// call android default gallery
-	    	intent.setType("image/*");
-	    	intent.setAction(Intent.ACTION_GET_CONTENT);
-	    	intent.putExtra("return-data", true);
+	    	public void onClick(View v) { /*Open Gallery*/
+	    	Intent intent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 	    	startActivityForResult(Intent.createChooser(intent,"Complete action using"), 2);
 	    	}
 	    });
@@ -60,8 +56,11 @@ public class MainActivity extends ActionBarActivity {
 	}
 	/** Create a File for saving the image */
 	private static File getOutputImageFile(){
-	    File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "HelloWorld!");
-	   	// Create the storage directory if it does not exist
+	    File imageStorageDir = new File(Environment.getExternalStorageDirectory(),"HelloWorld!");
+	    if (!imageStorageDir.exists())
+        {
+            imageStorageDir.mkdirs();// Create the storage directory if it does not exist
+        }
 	    // Create a media file name
 	    String imgName = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 	    File imageFile;
@@ -70,29 +69,32 @@ public class MainActivity extends ActionBarActivity {
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	      // TODO Auto-generated method stub
 	     super.onActivityResult(requestCode, resultCode, data);
 		 if (requestCode==1 && resultCode == RESULT_OK) { 
 			 if(null == data) {
-				 	//Bitmap bitmap;
-				 //	BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-				 //	bitmap = BitmapFactory.decodeFile(fileName.getAbsolutePath(),bitmapOptions); 
-                    //showImg.setImageBitmap(bitmap);
-				 //	Uri savedImg=Uri.fromFile(fileName);
 	               	Intent first = new Intent(this, SecondActivity.class);
-	                first.putExtra("name", fileName.toString() );
+	               	first.putExtra("name", fileName.toString() );
                     startActivity(first);
-                    
               }
 		 }
 		 else if(requestCode==2 && resultCode == RESULT_OK) {
 			 if(null!=data){
-				 Intent first = new Intent(this, SecondActivity.class);
-				 first.putExtra("name", fileName.toString() );
+				 Uri selectedImageUri = data.getData();
+	             selectedImagePath = getPath(selectedImageUri);
+	             System.out.println("Image Path : " + selectedImagePath);
+	             Intent first = new Intent(this, SecondActivity.class);
+				 first.putExtra("name", selectedImagePath);
 				 startActivity(first);
 			 }
 		 }
 	}
+	public String getPath(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        cursor.moveToFirst();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        return cursor.getString(column_index);
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
