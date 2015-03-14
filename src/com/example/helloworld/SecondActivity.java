@@ -1,8 +1,10 @@
 package com.example.helloworld;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 //import android.util.*;
@@ -21,7 +23,7 @@ public class SecondActivity extends ActionBarActivity {
 	Button button;
 	public Uri picUri;
 	public static File imgFile;
-	
+	private String selectedImagePath;
 	
 	@Override 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +59,12 @@ public class SecondActivity extends ActionBarActivity {
 		        	cropIntent.putExtra("aspectX", 1);
 		        	cropIntent.putExtra("aspectY", 1);
 		        	    //indicate output X and Y
-		        	cropIntent.putExtra("outputX", 256);
-		        	cropIntent.putExtra("outputY", 256);
+		        	cropIntent.putExtra("outputX", 320);
+		        	cropIntent.putExtra("outputY", 400);
+		        	cropIntent.putExtra("scale", true);
+		        	//cropIntent.putExtra("return-data", true);
 		        	    //retrieve data on return
-		        	cropIntent.putExtra("return-data", true);
+		        	cropIntent.putExtra(MediaStore.EXTRA_OUTPUT, true);
 		        	    //start the activity - we handle returning in onActivityResult
 		        	startActivityForResult(cropIntent, PIC_CROP);
 		        	 }
@@ -72,12 +76,25 @@ public class SecondActivity extends ActionBarActivity {
      super.onActivityResult(requestCode, resultCode, data);
 	 if (requestCode == PIC_CROP && resultCode == RESULT_OK) {
 		if(data!=null){
-			Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-       		ImageView showImg = (ImageView) findViewById(R.id.view_photo);
-       		showImg.setImageBitmap(myBitmap);
+			Uri selectedImageUri = data.getData();
+			selectedImagePath = getPath(selectedImageUri);
+           // showImg.setImageURI(selectedImageUri);
+			//Bitmap myBitmap = BitmapFactory.decodeFile(selectedImagePath);
+       		//ImageView showImg = (ImageView) findViewById(R.id.view_photo);
+       		//showImg.setImageBitmap(myBitmap);
+       		Intent first = new Intent(this, LanguageActivity.class);
+			first.putExtra("name", selectedImagePath);
+			startActivity(first);
        		}
 	 }
 	}
+	public String getPath(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        cursor.moveToFirst();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        return cursor.getString(column_index);
+    }
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

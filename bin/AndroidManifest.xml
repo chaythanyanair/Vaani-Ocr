@@ -28,7 +28,10 @@
             android:name=".SecondActivity"
             android:label="@string/next_name">
         </activity>
-        
+        <activity 
+            android:name=".LanguageActivity"
+            android:label="@string/choose">
+        </activity>
         </application>
 
 </manifest>

@@ -81,7 +81,6 @@ public class MainActivity extends ActionBarActivity {
 			 if(null!=data){
 				 Uri selectedImageUri = data.getData();
 	             selectedImagePath = getPath(selectedImageUri);
-	             System.out.println("Image Path : " + selectedImagePath);
 	             Intent first = new Intent(this, SecondActivity.class);
 				 first.putExtra("name", selectedImagePath);
 				 startActivity(first);

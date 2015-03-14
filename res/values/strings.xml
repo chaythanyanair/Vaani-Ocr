@@ -9,5 +9,6 @@
     <color name="opaque_red">#f00</color>
     <string name="next_name">Image</string>
     <string name="sel">Select Text</string>
+    <string name="choose">Choose Language</string>
 
 </resources>
