@@ -11,5 +11,18 @@
     <string name="sel">Select Text</string>
     <string name="choose">Choose Language</string>
     <color name="white">#e0f2f6 </color>
-
+    <string name="rec">Recognised Text</string>
+	<string name="trans">Translated Text</string>
+	<string name="language_prompt">Choose a language</string>
+	<string-array name="language_arrays"> 
+	    <item>Choose a Language</item> 
+	    <item>English</item> 
+	    <item>French</item> 
+	    <item>Spanish</item> 
+	    <item>Hindi</item> 
+	    <item>Mandarin</item> 
+	    <item>German</item> 
+	</string-array>
+	<string name="result">Translation</string>
+    <string name="sub">Submit</string>
 </resources>

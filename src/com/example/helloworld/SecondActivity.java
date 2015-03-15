@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import com.example.VaaniOcr.R;
+import com.example.helloworld.R;
 import java.io.*;
 //import android.media.*;
 
@@ -40,8 +40,8 @@ public class SecondActivity extends ActionBarActivity {
         /*Display Image*/
         if(imgFile.exists()){
         	Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-        	BitmapFactory.Options options = new BitmapFactory.Options();
-        	options.inSampleSize = 4;
+        	//BitmapFactory.Options options = new BitmapFactory.Options();
+        	//options.inSampleSize = 4;
        		ImageView showImg = (ImageView) findViewById(R.id.view_photo);
         	showImg.setImageBitmap(myBitmap);
         	}
@@ -60,15 +60,15 @@ public class SecondActivity extends ActionBarActivity {
 		        	cropIntent.putExtra("aspectX", 1);
 		        	cropIntent.putExtra("aspectY", 1);
 		        	    //indicate output X and Y
-		        	cropIntent.putExtra("outputX", 320);
-		        	cropIntent.putExtra("outputY", 400);
+		        	cropIntent.putExtra("outputX", 256);
+		        	cropIntent.putExtra("outputY", 256);
 		        	cropIntent.putExtra("scale", true);
 		        	//cropIntent.putExtra("return-data", true);
 		        	    //retrieve data on return
 		        	cropIntent.putExtra(MediaStore.EXTRA_OUTPUT, true);
 		        	    //start the activity - we handle returning in onActivityResult
 		        	startActivityForResult(cropIntent, PIC_CROP);
-		        	 }
+		        }
 		});
 	}
 	@Override
@@ -79,10 +79,6 @@ public class SecondActivity extends ActionBarActivity {
 		if(data!=null){
 			Uri selectedImageUri = data.getData();
 			selectedImagePath = getPath(selectedImageUri);
-           // showImg.setImageURI(selectedImageUri);
-			//Bitmap myBitmap = BitmapFactory.decodeFile(selectedImagePath);
-       		//ImageView showImg = (ImageView) findViewById(R.id.view_photo);
-       		//showImg.setImageBitmap(myBitmap);
        		Intent first = new Intent(this, LanguageActivity.class);
 			first.putExtra("name", selectedImagePath);
 			startActivity(first);

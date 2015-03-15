@@ -15,7 +15,7 @@ import android.content.Intent;
 import android.database.Cursor;
 
 import android.net.Uri;
-import com.example.VaaniOcr.R;
+import com.example.helloworld.R;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -57,7 +57,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 	/** Create a File for saving the image */
 	private static File getOutputImageFile(){
-	    File imageStorageDir = new File(Environment.getExternalStorageDirectory(),"HelloWorld!");
+	    File imageStorageDir = new File(Environment.getExternalStorageDirectory(),"Vaani");
 	    if (!imageStorageDir.exists())
         {
             imageStorageDir.mkdirs();// Create the storage directory if it does not exist
