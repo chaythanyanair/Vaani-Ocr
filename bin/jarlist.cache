@@ -1,5 +1,10 @@
 # cache for current jar dependency. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
+<<<<<<< HEAD
 1426173810000 1074044 33b27a8d2a5b87e6eb6c60e87a5374ffbfeacc3a /home/rekha/Documents/college/Programs/Java/HelloWorld!/libs/android-support-v4.jar
 1426155191000 1074044 33b27a8d2a5b87e6eb6c60e87a5374ffbfeacc3a /home/rekha/Documents/college/Programs/Java/appcompat_v7/libs/android-support-v4.jar
+=======
+1426081314000 995624 3e4e879d0b3dc11f2feb3f55e77e3b5bd82c4a28 /home/chaythanya/workspace/appcompat_v7/libs/android-support-v4.jar
+1426235848000 995624 3e4e879d0b3dc11f2feb3f55e77e3b5bd82c4a28 /home/chaythanya/workspace/Vaani_OCR2/libs/android-support-v4.jar
+>>>>>>> 841aa7ab5e617553ab43f7bfa58532c440a339dc
